@@ -1,0 +1,10 @@
+<h1>Leden -> Lezen</h1>
+<p>Lid definieren aan de hand van <p>
+<ul>
+<li> Naam </l1>
+<li> Coornaam</l1>
+<li> Gemeente</li>
+<li> Postcode</li>
+<li> . . . </l1>
+</ul>
+<p> of een combinatie hiervan</p>

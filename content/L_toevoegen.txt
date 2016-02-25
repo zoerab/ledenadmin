@@ -1,0 +1,5 @@
+<h1>Leden -> Toevoegen</h1>
+<p>zoveel mogelijk gegevens invullen <p>
+<p>enkel toevoegen wanneer er nog geen lid met deze gegevens gekend is.</p>
+<h2>Let op !</h2>
+<p>Gebruik "createSelect.inc.php" om na te gaan of het lid gekend is, je weet nooit welke gegevens er al dan niet ingegeven werden</p>

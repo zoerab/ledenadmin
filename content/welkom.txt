@@ -1,0 +1,9 @@
+<h1>Welkom op de &quot;leden applicatie&quot; voor web-alumni.</h1>
+<p>Van hieruit kan je </p>
+<ul>
+  <li>gegevens van leden consulteren </li>
+  <li>gegevens van leden aanpassen</li>
+  <li>nieuwe leden toevoegen </li>
+  <li>leden verwijderen</li>
+</ul>
+<p>veel success</p>
