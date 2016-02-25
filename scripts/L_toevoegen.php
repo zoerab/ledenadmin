@@ -27,6 +27,8 @@ include '../php_lib/menu.inc.php';
 include '../php_lib/createSelect.inc.php';
 //functie om gemeentenaam en/of postcode om te zetten naar key
 include '../php_lib/gemeente.inc.php';
+//functie om gender dropdown lijst te genereren
+include("../php_lib/dropDown.inc.php");
 // exception handling funtions
 include '../php_lib/myExceptionFunctions.inc.php';
 
@@ -45,33 +47,43 @@ try {
 
     // toon formulier
         $_inhoud = "<h1>Toevoegen</h1>
-		<form  method='post' action='$_srv'>
-		<label>Naam</label>
-		<input type='text' name='naam'>
-		<label>Voornaam</label>
-		<input type='text' name='voornaam'>
-		<label>Straat</label>
-		<input type='text' name='straat' size='20'>
-		<label>Nr + Extra</label>
-		<input type='text' name='nr' size='10'>
-		<input type='text' name='xtr' size='10'>
-		<label>Postcode</label>
-		<input type='text' name='postcode' size='10'>
-		<label>Gemeente</label>
-		<input type='text' name='gemnaam'size='50'>
-		<label >Telefoon</label>
-		<input type='text' name='tel' size='15'>
-		<label >Mobiel</label>
-		<input type='text' name='mob' size='15'>
-		<label for='tel'>E-mail</label>
-		<input type='text' name='mail' size='20'>
-		<input id ='submit' name='submit' type='submit' value='verzenden'>
+        <form  method='post' action='$_srv'>
+        <label>Naam</label>
+        <input type='text' name='naam'>
+        <label>Voornaam</label>
+        <input type='text' name='voornaam'>
+        <label >Gender</label>"
+        .
+        dropDown("gender","t_gender","d_index","d_mnemonic")
+        .
+        "<label>Soort</label>"
+        .
+        dropDown("soort","t_soort_lid","d_index","d_mnemonic")
+        .
+        "<label >Straat</label>
+        <input type='text' name='straat' size='20'>
+        <label>Nr + Extra</label>
+        <input type='text' name='nr' size='10'>
+        <input type='text' name='xtr' size='10'>
+        <label>Postcode</label>
+        <input type='text' name='postcode' size='10'>
+        <label>Gemeente</label>
+        <input type='text' name='gemnaam'size='50'>
+        <label >Telefoon</label>
+        <input type='text' name='tel' size='15'>
+        <label >Mobiel</label>
+        <input type='text' name='mob' size='15'>
+        <label for='tel'>E-mail</label>
+        <input type='text' name='mail' size='20'>
+        <input id ='submit' name='submit' type='submit' value='verzenden'>
 </form>";
     } else {
         // verwerk inhoud van het formulier
 // copieer de inhoud van $_POST (super global) naar lokale parameters
         $_naam = $_POST['naam'];
         $_voornaam = $_POST['voornaam'];
+        $_gender = $_POST["gender"];
+        $_soort = $_POST["soort"];
         $_straat = $_POST['straat'];
         $_nr = $_POST['nr'];
         $_xtr = $_POST['xtr'];
@@ -96,9 +108,9 @@ try {
 // Parameter 3 --> de lijst van bijhorende velden in de tabel/view (array)
 
         $_query = createSelect('v_leden',
-        array($_naam, $_voornaam, $_straat, $_nr,
+        array($_naam, $_voornaam,$_gender, $_soort, $_straat, $_nr,
         $_xtr, $_postcode, $_gemeenteNaam, $_telefoon, $_mob, $_fax, $_mail, ),
-        array('d_naam', 'd_voornaam', 'd_straat', 'd_nr', 'd_xtr', 'd_Postnummer', 'd_GemeenteNaam', 'd_tel', 'd_mob', 'd_fax', 'd_mail'));
+        array('d_naam', 'd_voornaam','d_gender','d_soortlid', 'd_straat', 'd_nr', 'd_xtr', 'd_Postnummer', 'd_GemeenteNaam', 'd_tel', 'd_mob', 'd_fax', 'd_mail'));
 
 // verstuur de query naar het dbms
         $_result = $_PDO->query("$_query");
@@ -116,8 +128,8 @@ try {
 // tabel --> t_leden
 // primary key wordt niet megegeven vermits we voor de tabel "auto increment (ai)" geactiveerd hebben
 
-             $_result = $_PDO->query("INSERT INTO t_leden (d_naam, d_voornaam, d_straat, d_nr, d_xtr, d_gemeente, d_tel, d_mob,  d_mail) VALUES
-																											 ('$_naam', '$_voornaam','$_straat', '$_nr', '$_xtr', '$_gemeente', '$_telefoon','$_mob','$_mail');");
+             $_result = $_PDO->query("INSERT INTO t_leden (d_naam, d_voornaam, d_gender, d_soort, d_straat, d_nr, d_xtr, d_gemeente, d_tel, d_mob,  d_mail) VALUES
+                                                          ('$_naam', '$_voornaam','$_gender','$_soort','$_straat', '$_nr', '$_xtr', '$_gemeente', '$_telefoon','$_mob','$_mail');");
 
 //nieuw lid is toegevoegd
          $_inhoud = "<br><br><br><br><br><br><h2>Lid &nbsp;&nbsp;$_voornaam &nbsp;&nbsp;$_naam&nbsp;&nbsp;is toegevoegd</h2>";

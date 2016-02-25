@@ -24,6 +24,8 @@ include("../php_lib/inlezen.inc.php");
 include("../php_lib/menu.inc.php");
 //functie om selection query samen te stellen
 include("../php_lib/createSelect.inc.php");
+//functie om gender dropdown lijst te genereren
+include("../php_lib/dropDown.inc.php");
 // exception handling funtions
 include("../php_lib/myExceptionFuntions.inc.php");
 
@@ -51,7 +53,15 @@ try{
 		<input type='text' name='naam'>
 		<label >Voornaam</label>
 		<input type='text' name='voornaam'>
-		<label >Straat</label>
+		<label >Gender</label>"
+		.
+		dropDown("gender","t_gender","d_index","d_mnemonic")
+		.
+		"<label>Soort</label>"
+		.
+		dropDown("soort","t_soort_lid","d_index","d_mnemonic")
+		.
+		"<label >Straat</label>
 		<input type='text' name='straat' size='50'>
 		<label >Nr</label>
 		<input type='text' name='nr' size='10'>
@@ -77,6 +87,8 @@ try{
 		// copieer de inhoud van $_POST (super global) naar lokale parameters
 		$_naam =$_POST["naam"];
 		$_voornaam = $_POST["voornaam"];
+		$_gender = $_POST["gender"];
+		$_soort = $_POST["soort"];
 		$_straat = $_POST["straat"];
 		$_nr = $_POST["nr"];
 		$_xtr = $_POST["xtr"];
@@ -96,8 +108,8 @@ try{
 		// Parameter 2 --> de lijst van ingevoerde waarden (array)
 		// Parameter 3 --> de lijst van bijhorende velden in de tabel/view (array)
 		$_query = createSelect("v_leden",
-													 array($_naam, $_voornaam, $_straat, $_nr, $_xtr, $_postcode, $_gemeenteNaam, $_telefoon, $_mob, $_mail),
-													 array('d_naam', 'd_voornaam', 'd_straat','d_nr','d_xtr','d_Postnummer', 'd_GemeenteNaam', 'd_tel','d_mob', 'd_mail'));
+													 array($_naam, $_voornaam,$_gender, $_soort, $_straat, $_nr, $_xtr, $_postcode, $_gemeenteNaam, $_telefoon, $_mob, $_mail),
+													 array('d_naam', 'd_voornaam', 'd_gender', 'd_soortlid', 'd_straat','d_nr','d_xtr','d_Postnummer', 'd_GemeenteNaam', 'd_tel','d_mob', 'd_mail'));
 
 		// verstuur de query naar het dbms
 		$_result = $_PDO -> query("$_query");
@@ -110,6 +122,8 @@ try{
 			{
 				//toon alle gevonden leden
 				$_inhoud.= $_row['d_voornaam']." ".$_row['d_naam']."<br><br>";
+				$_inhoud.=$_row['d_soortlid_mnem']."<br>";
+				$_inhoud.=$_row['d_gender_mnem']."<br><br>";
 				$_inhoud.= $_row['d_straat']."&nbsp;&nbsp;".$_row['d_nr']."&nbsp;&nbsp;".$_row['d_Xtr']."<br>";
 				$_inhoud.= $_row['d_Postnummer']."&nbsp;&nbsp;".$_row['d_GemeenteNaam']."<br><br>";
 				$_inhoud.= "Tel : ".$_row['d_tel']."<br>";

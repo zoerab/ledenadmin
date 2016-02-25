@@ -119,7 +119,7 @@ try{
       while ($_row = $_result -> fetch(PDO::FETCH_ASSOC))
       {
         $_inhoud.= $_row['d_voornaam']." ".$_row['d_naam']."<br><br>";
-        $_inhoud.=$_row['d_soortlid_mnem']."<br><br>";
+        $_inhoud.=$_row['d_soortlid_mnem']."<br>";
         $_inhoud.=$_row['d_gender_mnem']."<br><br>";
         $_inhoud.= $_row['d_straat']."&nbsp;&nbsp;".$_row['d_nr']."&nbsp;&nbsp;".$_row['d_Xtr']."<br>";
         $_inhoud.= $_row['d_Postnummer']."&nbsp;&nbsp;".$_row['d_GemeenteNaam']."<br><br>";
