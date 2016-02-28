@@ -132,10 +132,7 @@ try{
          {
            $_inhoud = "<br><br><br><br><br><br><h2>Geen records gevonden voor deze input</h2>";
          }
-
-
         $_inhoud .="<br><a href='$_srv'>volgende</a>";
-
   }
 
 
