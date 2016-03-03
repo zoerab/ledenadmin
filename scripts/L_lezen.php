@@ -75,6 +75,7 @@ try{
      <label>E-mail</label>
     <input type='text' name='mail' size='40'>
     <input  name='submit' type='submit' value='verzenden'>
+    <input  name='showall' type='submit' value='alles'>
   </form>";
 
   }
@@ -96,7 +97,13 @@ try{
     $_mob = $_POST["mob"];
     $_mail = $_POST["mail"];
 
+// Toon alles
 
+    if(!isset($_POST['showall'])){
+
+
+
+    }
 
 // Maak met de ingevoerde waarden de bijhorende query.
 // hiervoor gebruiken we de functie createSelect

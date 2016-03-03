@@ -94,7 +94,6 @@ try {
         // postcode en/of gemeentenaam omzetten naar key
 
         $_gemeente = gemeente_nummer($_postcode, $_gemeenteNaam);
-        $_fax = $_POST['fax'];
         $_mob = $_POST['mob'];
         $_mail = $_POST['mail'];
 
@@ -108,9 +107,8 @@ try {
 // Parameter 3 --> de lijst van bijhorende velden in de tabel/view (array)
 
         $_query = createSelect('v_leden',
-        array($_naam, $_voornaam,$_gender, $_soort, $_straat, $_nr,
-        $_xtr, $_postcode, $_gemeenteNaam, $_telefoon, $_mob, $_fax, $_mail, ),
-        array('d_naam', 'd_voornaam','d_gender','d_soortlid', 'd_straat', 'd_nr', 'd_xtr', 'd_Postnummer', 'd_GemeenteNaam', 'd_tel', 'd_mob', 'd_fax', 'd_mail'));
+        array($_naam, $_voornaam,$_gender, $_soort, $_straat, $_nr, $_xtr, $_postcode, $_gemeenteNaam, $_telefoon, $_mob, $_mail, ),
+        array('d_naam', 'd_voornaam','d_gender','d_soortlid', 'd_straat', 'd_nr', 'd_xtr', 'd_Postnummer', 'd_GemeenteNaam', 'd_tel', 'd_mob', 'd_mail'));
 
 // verstuur de query naar het dbms
         $_result = $_PDO->query("$_query");
@@ -127,7 +125,6 @@ try {
 // maak insert query
 // tabel --> t_leden
 // primary key wordt niet megegeven vermits we voor de tabel "auto increment (ai)" geactiveerd hebben
-
              $_result = $_PDO->query("INSERT INTO t_leden (d_naam, d_voornaam, d_gender, d_soort, d_straat, d_nr, d_xtr, d_gemeente, d_tel, d_mob,  d_mail) VALUES
                                                           ('$_naam', '$_voornaam','$_gender','$_soort','$_straat', '$_nr', '$_xtr', '$_gemeente', '$_telefoon','$_mob','$_mail');");
 
